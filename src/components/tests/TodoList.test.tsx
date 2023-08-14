@@ -17,7 +17,7 @@ describe("리스트 구현", () => {
     render(<TodoList />);
 
     const input = screen.getByRole("textbox");
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: "추가" });
 
     await user.type(input, fakeExample);
     await user.click(button);
