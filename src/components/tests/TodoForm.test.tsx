@@ -8,7 +8,7 @@ describe("TodoForm 테스트하기", () => {
     const user = userEvent.setup();
     const fakeExample = "TODO 추가하기";
 
-    render(<TodoForm setTodos={fakeFn} />);
+    render(<TodoForm addTodo={fakeFn} />);
 
     const input = screen.getByRole("textbox");
     const button = screen.getByRole("button");
@@ -16,6 +16,7 @@ describe("TodoForm 테스트하기", () => {
     await user.type(input, fakeExample);
     await user.click(button);
 
+    expect(fakeFn).toBeCalledTimes(1);
     expect(input).toHaveValue("");
   });
 });

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
-import { v4 as uuidv4 } from "uuid";
 
 export type Todo = {
   id: string;
@@ -11,9 +10,11 @@ export type Todo = {
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([
-    { id: uuidv4(), text: "TDD", status: "active" },
-    { id: uuidv4(), text: "TODO", status: "active" },
+    { id: "234", text: "TDD", status: "active" },
+    { id: "345", text: "TODO", status: "active" },
   ]);
+
+  const handleAdd = (todo: Todo) => setTodos((prev) => [...prev, todo]);
 
   return (
     <section>
@@ -22,7 +23,7 @@ const TodoList = () => {
           <TodoItem todo={todo} key={todo.id} setTodos={setTodos} />
         ))}
       </ul>
-      <TodoForm setTodos={setTodos} />
+      <TodoForm addTodo={handleAdd} />
     </section>
   );
 };

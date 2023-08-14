@@ -3,28 +3,29 @@ import { Todo } from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 
 type Props = {
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  addTodo: (arg: Todo) => void;
 };
 
-function TodoForm({ setTodos }: Props) {
-  const [inputValue, setInputValue] = useState("");
+function TodoForm({ addTodo }: Props) {
+  const [text, setText] = useState("");
 
-  const addTodo = () => {
-    setTodos((prev) => [
-      ...prev,
-      { id: uuidv4(), text: inputValue, status: "active" },
-    ]);
-    setInputValue("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setText(e.target.value);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (text.trim().length === 0) {
+      return;
+    }
+    addTodo({ id: uuidv4(), text, status: "active" });
+    setText("");
   };
+
   return (
-    <>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={addTodo}>추가</button>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={text} onChange={handleChange} />
+      <button>추가</button>
+    </form>
   );
 }
 

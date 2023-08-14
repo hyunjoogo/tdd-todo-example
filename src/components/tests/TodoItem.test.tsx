@@ -2,11 +2,10 @@ import { render, screen } from "@testing-library/react";
 import TodoItem from "../TodoItem";
 import { Todo } from "../TodoList";
 import userEvent from "@testing-library/user-event";
-import { v4 as uuidv4 } from "uuid";
 
 describe("투두 아이템 확인하기", () => {
   const fakeTodoItem: Todo = {
-    id: uuidv4(),
+    id: "123",
     text: "임의의 아이템",
     status: "completed",
   };
