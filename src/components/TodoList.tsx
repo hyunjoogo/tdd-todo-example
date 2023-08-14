@@ -8,7 +8,11 @@ export type Todo = {
   status: "active" | "completed";
 };
 
-const TodoList = () => {
+type TodoListProps = {
+  filter: string;
+};
+
+const TodoList = ({ filter }: TodoListProps) => {
   const [todos, setTodos] = useState<Todo[]>([
     { id: "234", text: "TDD", status: "active" },
     { id: "345", text: "TODO", status: "active" },
@@ -20,10 +24,12 @@ const TodoList = () => {
   const handleDelete = (deleted: Todo) =>
     setTodos(todos.filter((item) => item.id === deleted.id));
 
+  const filteredTodos = filterTodo(filter, todos);
+
   return (
     <section>
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <TodoItem
             todo={todo}
             key={todo.id}
@@ -38,3 +44,10 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
+function filterTodo(filter: string, todos: Todo[]) {
+  if (filter === "all") {
+    return todos;
+  }
+  return todos.filter((todo) => todo.status === filter);
+}
