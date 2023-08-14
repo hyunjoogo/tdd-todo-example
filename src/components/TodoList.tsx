@@ -14,13 +14,22 @@ const TodoList = () => {
     { id: "345", text: "TODO", status: "active" },
   ]);
 
-  const handleAdd = (todo: Todo) => setTodos((prev) => [...prev, todo]);
+  const handleAdd = (todo: Todo) => setTodos([...todos, todo]);
+  const handleUpdate = (updated: Todo) =>
+    setTodos(todos.map((item) => (item.id === updated.id ? updated : item)));
+  const handleDelete = (deleted: Todo) =>
+    setTodos(todos.filter((item) => item.id === deleted.id));
 
   return (
     <section>
       <ul>
         {todos.map((todo) => (
-          <TodoItem todo={todo} key={todo.id} setTodos={setTodos} />
+          <TodoItem
+            todo={todo}
+            key={todo.id}
+            updateTodo={handleUpdate}
+            deleteTodo={handleDelete}
+          />
         ))}
       </ul>
       <TodoForm addTodo={handleAdd} />

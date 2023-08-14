@@ -10,10 +10,19 @@ describe("투두 아이템 확인하기", () => {
     status: "completed",
   };
   const user = userEvent.setup();
-  const fakeFn = jest.fn();
+  const todoFn = {
+    updateTodo: jest.fn(),
+    deleteTodo: jest.fn(),
+  };
 
   it("임의의 값이 잘 나오는지 확인하기 + 체크박스 상태 확인", () => {
-    render(<TodoItem todo={fakeTodoItem} setTodos={fakeFn} />);
+    render(
+      <TodoItem
+        todo={fakeTodoItem}
+        updateTodo={todoFn.updateTodo}
+        deleteTodo={todoFn.deleteTodo}
+      />,
+    );
 
     const listItem = screen.getByRole("listitem");
     const checkbox = screen.getByRole("checkbox");
@@ -25,22 +34,34 @@ describe("투두 아이템 확인하기", () => {
   });
 
   it("status 변경하기", async () => {
-    render(<TodoItem todo={fakeTodoItem} setTodos={fakeFn} />);
+    render(
+      <TodoItem
+        todo={fakeTodoItem}
+        updateTodo={todoFn.updateTodo}
+        deleteTodo={todoFn.deleteTodo}
+      />,
+    );
 
     const checkbox = screen.getByRole("checkbox");
     await user.click(checkbox);
 
-    expect(fakeFn).toHaveBeenCalledTimes(1);
+    expect(todoFn.updateTodo).toHaveBeenCalledTimes(1);
     // 왜 변경이 반영이 안될까?
     // expect(checkbox).not.toBeChecked();
   });
   it("투두 삭제하기", async () => {
-    render(<TodoItem todo={fakeTodoItem} setTodos={fakeFn} />);
+    render(
+      <TodoItem
+        todo={fakeTodoItem}
+        updateTodo={todoFn.updateTodo}
+        deleteTodo={todoFn.deleteTodo}
+      />,
+    );
 
     const button = screen.getByRole("button", { name: "삭제" });
     await user.click(button);
 
-    expect(fakeFn).toHaveBeenCalledTimes(1);
+    expect(todoFn.deleteTodo).toHaveBeenCalledTimes(1);
     // 의도하는 바는 내부에 있는 함수(deleteTodo(targetId))가 정확한 인자를 가지고 실행이 되었는지 보는 것
     // expect(???????).toHaveBeenCalledWith([fakeTodoItem.id]);
   });
