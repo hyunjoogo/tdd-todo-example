@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Todo } from "./TodoList";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
+
 function TodoForm({ setTodos }: Props) {
   const [inputValue, setInputValue] = useState("");
 
   const addTodo = () => {
     setTodos((prev) => [
       ...prev,
-      { id: 3, text: inputValue, status: "active" },
+      { id: uuidv4(), text: inputValue, status: "active" },
     ]);
     setInputValue("");
   };

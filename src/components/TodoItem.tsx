@@ -9,13 +9,13 @@ type Props = {
 function TodoItem({ todo, setTodos }: Props) {
   const isCompleted = todo.status === "completed";
 
-  function deleteTodo(targetId: number) {
+  function deleteTodo(targetId: string) {
     // todos에게 나를 삭제해줘라고 해야되
     // setTodos를 해서 나의 id와 다른것만 셋하기
     setTodos((prev) => prev.filter((item) => item.id !== targetId));
   }
 
-  function changeStatus(id: number, checked: boolean) {
+  function changeStatus(id: string, checked: boolean) {
     setTodos((prev) =>
       prev.map((item) =>
         item.id === id
