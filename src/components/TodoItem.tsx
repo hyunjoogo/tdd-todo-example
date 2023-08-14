@@ -33,7 +33,7 @@ function TodoItem({ todo, setTodos }: Props) {
         checked={isCompleted}
         onChange={(e) => changeStatus(todo.id, e.target.checked)}
       />
-      <p>{todo.content}</p>
+      <p>{todo.text}</p>
       <button onClick={() => deleteTodo(todo.id)}>삭제</button>
     </li>
   );

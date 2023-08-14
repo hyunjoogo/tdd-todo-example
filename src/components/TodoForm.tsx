@@ -10,7 +10,7 @@ function TodoForm({ setTodos }: Props) {
   const addTodo = () => {
     setTodos((prev) => [
       ...prev,
-      { id: 3, content: inputValue, status: "active" },
+      { id: 3, text: inputValue, status: "active" },
     ]);
     setInputValue("");
   };

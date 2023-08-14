@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 describe("투두 아이템 확인하기", () => {
   const fakeTodoItem: Todo = {
     id: 1,
-    content: "임의의 아이템",
+    text: "임의의 아이템",
     status: "completed",
   };
   const user = userEvent.setup();
@@ -18,7 +18,7 @@ describe("투두 아이템 확인하기", () => {
     const listItem = screen.getByRole("listitem");
     const checkbox = screen.getByRole("checkbox");
 
-    expect(listItem).toHaveTextContent(fakeTodoItem.content);
+    expect(listItem).toHaveTextContent(fakeTodoItem.text);
     // 이건 뭔가 테스트가 바뀌면 문제가 생길 수도 있는거네
     // status가 active면 not을 붙여야하는데 조건문으로 하니까 expect를 조건문에 넣지 말라고 하네
     expect(checkbox).toBeChecked();
