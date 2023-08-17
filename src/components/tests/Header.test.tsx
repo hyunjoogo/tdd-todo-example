@@ -3,8 +3,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("Header", () => {
-  // filter의 이름이 변경이 되어도 이 테스트는 계속 사용되어야 한다.
-  //
+  // 1. UI 렌더링의 정확성
+  // 2. 사용자 상호 작용의 신뢰성에 중점을 두어 일관되고 신뢰할 수 있는 사용자 경험을 제공하는 것의 중요성을 강조
+
   const filters = ["Filter 1", "Filter 2", "Filter 3"];
   const selectedFilter = "Filter 1";
   const secondFilter = filters[1];
